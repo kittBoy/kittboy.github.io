@@ -1,0 +1,88 @@
+<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>ckeditor引导程序 | 蓝色天空</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">ckeditor引导程序</h1><a id="logo" href="/.">蓝色天空</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Start</i></a><a href="/archives/"><i class="fa fa-archive"> Archiv</i></a><a href="/about/"><i class="fa fa-user"> Über</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">ckeditor引导程序</h1><div class="post-meta">Jul 7, 2016<span> | </span><span class="category"><a href="/categories/js/">js</a><a href="/categories/js/ckeditor/">ckeditor</a></span></div><div class="post-content"><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近公司的老大让搞一下富文本编辑器ckeditor,要兼容老数据。所以就研究了下ckeditor,写几篇文章记录下学习成果。</p>
+<h3 id="ckeditor-bootstrap"><a href="#ckeditor-bootstrap" class="headerlink" title="ckeditor-bootstrap"></a>ckeditor-bootstrap</h3><ol>
+<li>入口文件/ckeditor-dev/ckeditor.js -&gt; /ckeditor-dev/core/ckeditor_base.js</li>
+</ol>
+<ul>
+<li>创建唯一的全局CKEDITOR对象</li>
+<li>启动加载函数-&gt;/core/loader.js,并指定默认加载函数为ckeditor</li>
+<li><p>设置ckedtor状态</p>
+<p> unload the API is not yet loaded.</p>
+<p> basic_loaded: the basic API features are available.</p>
+<p> basic_ready: the basic API is ready to load the full core code.</p>
+<p> loaded**: the API can be fully used.</p>
+</li>
+</ul>
+<ol start="2">
+<li><p>loader.js</p>
+<ul>
+<li>加载ckeditor文件，并在加载其之前加载依赖文件。</li>
+</ul>
+</li>
+<li><p>event.js</p>
+</li>
+</ol>
+<ul>
+<li>各模块通过继承event的原型链实现事件机制。</li>
+</ul>
+<ol start="4">
+<li>editor_basic.js</li>
+</ol>
+<ul>
+<li>通过继承event对象，实现事件机制，并覆盖默认的事件触发方法 fire和fireOnce</li>
+</ul>
+<ol start="5">
+<li><p>env.js.检测浏览器环境，并将其保存在CKEDITOR.env对象中。</p>
+</li>
+<li><p>ckeditor_basic.js CKEDITOR通过继承event实现事件机制； 绑定dom加载完成事件，在dom加载完成后，调用onload函数加载full code;并设置当前状态为basic_loaded;</p>
+</li>
+<li>log.js 绑定函数到CKEDITOR对象，通过触发log事件，实现信息的打印；并为CKEDITOR绑定log事件。</li>
+<li>dom.js 初始化dom对象；</li>
+<li>tools.js 初始化CKEDITOR.tools对象；</li>
+<li>dtd.js 通过定义ckeditor.dtd对象，实现ckeditor内部标签嵌套规范。</li>
+<li>dom-event.js 封装dom事件接口，屏蔽各浏览器差异。</li>
+<li>dom-domobject.js 封装原生dom事件接口。</li>
+<li>dom-node.js 封装原生dom操作屏蔽各浏览器实现差异，定义统一操作接口。</li>
+<li>dom-window.js 封装原生window对象</li>
+<li>dom-document.js 封装原生document对象</li>
+<li>dom-nodelist 封装原生nodelist对象。</li>
+<li>dom-element.js 封装原生element操作，屏蔽浏览器差异，提供统一对外接口。</li>
+<li>dom-documentfragment.js 封装原生documetnfragment操作，屏蔽浏览器差异，提供统一对外接口。</li>
+<li>dom-walker.js 提供了遍历selection对象的方法。是ckeditor过滤机制底层实现的一部分。</li>
+<li>dom-range.js 封装了原始的range操作，屏蔽了浏览器差异，提供统一对外接口。</li>
+<li>command.js ckeditor插件的核心实现的一部分，提供了ckeditor的命令机制。</li>
+<li>ckeditor_base.js</li>
+<li>config.js ckeditor默认配置</li>
+<li>filter.js ckeditor 过滤机制的底层实现，是allowedContent和disallowedContent的底层支持</li>
+<li>focusmanager.js 封装了focus事件，提供了锁机制。</li>
+<li>keystrokehandler.js 将键盘事件绑定到ckeditor对象上。</li>
+<li>lang.js ckeditor 多语言支持。</li>
+<li>scriptloader.js 实现了异步加载js队列。</li>
+<li>resourcemanager.js ckeditor资源管理器，是插件机制的底层支持之一。</li>
+<li>plugins.js 加载插件。</li>
+<li>ui.js ckeditor界面控制器。</li>
+<li>editor.js 代表了编辑器实例，实现了事件机制，加载客户端配置，初始化编辑器实例，包括界面，插件，事件等。</li>
+<li>htmlparser.js 解析html.</li>
+<li>htmlparser-basicwriter.js 提供了文本到html的转换</li>
+<li>htmlparser-node.js 提供了解析html时基本的node操作</li>
+<li>htmlparser-comment.js 提供了解析html时对comment的过滤和插入。</li>
+<li>htmlparser-text.js 解析html时过滤和插入的支持</li>
+<li>htmlparser-cdata.js 提供了解析html时过滤和插入cdata的支持</li>
+<li>htmlparser-fragment.js 提过了解析html时对fragment内容的过滤和插入的支持</li>
+<li>htmlparser-filter.js 封装了底层过滤机制，供上层调用。</li>
+<li>htmldataprocessor.js 组合htmlparser功能，通过事件机制，对文本到editor的输入和输出进行转化。</li>
+<li>htmlparser-element.js 提供了解析html时过滤和插入element对象的属性和样式的支持</li>
+<li>template.js 提供了模板样式的支持</li>
+<li>ckeditor.js 实例化ckeditor.document对象，加载_bootstrap。</li>
+<li>creators-inline.js 获取ckeditor实例dom元素，并将其contenteditable设置为true.</li>
+<li>creators-themedui.js 替换textarea为ckeditor instances.</li>
+<li>editable.js 可编辑区域的交互API实现</li>
+<li>selection.js 鼠标区域选择API实现</li>
+<li>style.js ckeditor自定义样式API封装，挂载点 CKEDITOR.style.</li>
+<li>dom-comment.js 封装原生的添加注释方法，屏蔽浏览器差异，提供统一API.</li>
+<li>dom-elementpath.js 提供获得dom节点路径的API.</li>
+<li>dom-text.js 封装元素text的操作API。</li>
+<li>dom-ranglist.js 封装对ranglist集合的操作API.</li>
+<li>skin.js ckeditor界面皮肤设置。</li>
+<li>_bootstrap.js ckeditor初始化完成，用户代码可以执行。</li>
+</ol>
+</div><div class="tags"><a href="/tags/ckeditor/">ckeditor</a><a href="/tags/js/">js</a></div><div class="post-nav"><a class="pre" href="/2016/07/10/ckeditor 概览/">ckeditor 概览</a><a class="next" href="/2016/06/16/ckeditor插件机制/">ckeditor插件机制</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://kittboy.github.io"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Kategorien</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/FE/">FE</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/FE/CSS/">CSS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/js/ckeditor/">ckeditor</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/es6/">es6</a></li></ul></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/ckeditor/" style="font-size: 15px;">ckeditor</a> <a href="/tags/js/" style="font-size: 15px;">js</a> <a href="/tags/es6/" style="font-size: 15px;">es6</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/FE/" style="font-size: 15px;">FE</a> <a href="/tags/CSS/" style="font-size: 15px;">CSS</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Letzte</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/07/10/ckeditor 概览/">ckeditor 概览</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/ckeditor引导程序/">ckeditor引导程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/16/ckeditor插件机制/">ckeditor插件机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/12/ckeditor 事件机制与发布订阅模式/">ckeditor 事件机制与发布订阅模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/10/ckeditor 插件机制中用到的设计模式/">ckeditor 插件机制中用到的设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/12/ES6语法学习/">ES6语法学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/05/12/git常用命令/">git常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/01/15/移动端无缝适配的几种实现方式/">移动端无缝适配的几种实现方式</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Blogroll</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2018 <a href="/." rel="nofollow">蓝色天空.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
